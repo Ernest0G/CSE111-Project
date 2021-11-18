@@ -38,18 +38,18 @@ CREATE TABLE catering (
     c_name varchar(255),
     c_price int,
     c_type varchar(50)
-)
+);
 
 CREATE TABLE cateringBill (
     cb_id int,
     cb_guestNumber int,
     cb_foodName varchar(255),
     cb_price int
-)
+);
 
 CREATE TABLE revenue (
     rev_date date,
     rev_revenue int,
     rev_guestNumber int
-)
+);
 
