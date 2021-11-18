@@ -38,7 +38,7 @@ WHERE r_roomNumber NOT IN
 
 -- 6) 
 -- Find the catering item bought the most for each catering type
-SELECT cb_foodName, MAX(occurance) as, c_type
+SELECT cb_foodName, MAX(occurance), c_type
 FROM 
 (
     SELECT cb_foodName, COUNT(cb_foodName) as occurance, c_type
