@@ -64,9 +64,25 @@ FROM
 )
 WHERE r_roomCapacity = 4 AND r_beds = 2;
 
+-- 19)
+-- Find the cheapest room for each room type that hasn't been booked. 
+-- Display the room type, room number,bed count, room capacity, and its price. 
+SELECT r_type, r_roomNumber, r_beds, r_roomCapacity, MIN(r_pricePerNight)
+FROM
+(
+    SELECT r_roomNumber, r_roomCapacity,r_beds, r_pricePerNight, r_type
+    FROM room
+    WHERE r_roomNumber NOT IN 
+    (
+        SELECT b_roomNumber as r_roomNumber
+        FROM booking
+    )
+)
+GROUP BY r_type;
+
 -- 20) 
 -- For each staff member that was given feedback from a guest, find their average, highest, and lowest rating.
 SELECT s_name, AVG(f_rating), MAX(f_rating), MIN(f_rating)
 FROM staff
 JOIN feedback ON f_staffID = s_ID
-GROUP BY s_name
+GROUP BY s_name;
