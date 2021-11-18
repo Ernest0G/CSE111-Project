@@ -68,32 +68,32 @@ WHERE r_roomCapacity = 4 AND r_beds = 2;
 --Find the revenue of the guest number #11 generates? We need to be able to find the revenue each guest generates.
 SELECT rev_revenue
 FROM revenue
-WHERE rev_guestNumber = 11
+WHERE rev_guestNumber = 11;
 
 -- 9) Huy Vu
 -- Change the guest #18’s room number to 30. The guest wants to change the room.
 UPDATE booking
 SET b_roomNumber = 30
-WHERE b_guestNumber = 18
+WHERE b_guestNumber = 18;
 
 -- 10) Huy Vu
 -- Delete the booking of guest#25. That person just cancelled the booking
 DELETE 
 FROM booking
-WHERE b_guestNumber = 25
+WHERE b_guestNumber = 25;
 
 -- 11) Huy Vu
 -- Find the number of guests that order breakfast. 
 -- The waiter needs to prepare for the number of dishes on the table.
 SELECT [COUNT](*)
 FROM cateringBill, catering
-WHERE c_name = cb_foodName AND c_type = "Breakfast"
+WHERE c_name = cb_foodName AND c_type = "Breakfast";
 
 -- 12) Huy Vu
 -- Find the number of guests who want Lasagna. The chefs want to know for specific order.
 SELECT [COUNT](*)
 FROM cateringBill
-WHERE cb_foodName = "Lasagna"
+WHERE cb_foodName = "Lasagna";
 
 -- 13) Huy Vu
 -- Find the guest with the highest money paid to the hotel. 
@@ -101,7 +101,7 @@ WHERE cb_foodName = "Lasagna"
 -- The guest with highest paid is our favorite customer!
 SELECT [MAX](rev_revenue), g_name
 FROM guest, revenue
-WHERE rev_guestNumber = g_guestNumber
+WHERE rev_guestNumber = g_guestNumber;
 
 -- 14) Huy Vu
 -- Find the guest with the lowest money paid to the hotel. 
@@ -109,34 +109,34 @@ WHERE rev_guestNumber = g_guestNumber
 -- Encourage that guest to comback again one day!
 SELECT [MIN](rev_revenue), g_name
 FROM guest, revenue
-WHERE rev_guestNumber = g_guestNumber
+WHERE rev_guestNumber = g_guestNumber;
 
 -- 15) Huy Vu
 -- Add another waiter name “Tim Hathaway”. He just got qualified for the job!
-INSERT INTO staff (s_ID, s_name, s_jobTitle) VALUES (13, 'Tim Hathaway', 'Waiter')
+INSERT INTO staff (s_ID, s_name, s_jobTitle) VALUES (13, 'Tim Hathaway', 'Waiter');
 
 -- 16) Huy Vu
 -- Delete Victor Lam from the employee list. This employee is no longer here.
 DELETE 
 FROM staff
-WHERE s_name = "Victor Lam" 
+WHERE s_name = "Victor Lam";
 
 -- 17) Huy Vu
 -- Update the cost of pizza to $8. Ingredients' cost increases
 UPDATE catering
 SET c_price = 8
-WHERE c_name = "Pizza"
+WHERE c_name = "Pizza";
 -- Because cateringBill has the price of the food as well
 UPDATE cateringBill
 SET cb_price = 8
-WHERE cb_foodName = "Pizza"
+WHERE cb_foodName = "Pizza";
 
 --18) Huy Vu
 -- Guest number 25 does not like having a mouse in his room. 
 --Therefore, change the feedback to “A mouse is in the room. Would not recommend the hotel!”
 UPDATE feedback
 SET f_comment = "A mouse is in the room. Would not recommend the hotel!"
-WHERE f_guestNumber = 25
+WHERE f_guestNumber = 25;
 
 -- 19) Ernesto Gutierrez
 -- Find the cheapest room for each room type that hasn't been booked. 
@@ -165,4 +165,4 @@ GROUP BY s_name;
 -- Change the room cost of room number 25 to $500. Hotel manager wants to increases the price.
 UPDATE room
 SET r_pricePerNight = 500
-WHERE r_roomNumber = 25
+WHERE r_roomNumber = 25;
