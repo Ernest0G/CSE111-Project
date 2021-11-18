@@ -65,8 +65,7 @@ FROM
 WHERE r_roomCapacity = 4 AND r_beds = 2;
 
 -- 20) 
--- For each staff member that was given feedback from a guest, find their average rating.
--- Display the name of the staff and their average, highest, and lowest rating.
+-- For each staff member that was given feedback from a guest, find their average, highest, and lowest rating.
 SELECT s_name, AVG(f_rating), MAX(f_rating), MIN(f_rating)
 FROM staff
 JOIN feedback ON f_staffID = s_ID
