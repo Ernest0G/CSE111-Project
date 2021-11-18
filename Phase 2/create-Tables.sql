@@ -13,17 +13,14 @@ CREATE TABLE booking (
     b_daysBooked int
 );
 
-DROP TABLE guest
-
 CREATE TABLE guest (
-    g_guestNumber int PRIMARY KEY,
+    g_guestNumber int PRIMARY KEY NOT NULL,
     g_name varchar(255),
     g_phoneNumber varchar(15),
     g_email varchar(255),
     g_guestCount int
 );
 
-DROP TABLE feedback
 CREATE TABLE feedback (
     f_guestNumber int,
     f_staffID int,
@@ -32,8 +29,27 @@ CREATE TABLE feedback (
 );
 
 CREATE TABLE staff (
-    s_ID int,
+    s_ID int PRIMARY KEY,
     s_name varchar(255),
     s_jobTitle varchar(255)
 );
+
+CREATE TABLE catering (
+    c_name varchar(255),
+    c_price int,
+    c_type varchar(50)
+)
+
+CREATE TABLE cateringBill (
+    cb_id int,
+    cb_guestNumber int,
+    cb_foodName varchar(255),
+    cb_price int
+)
+
+CREATE TABLE revenue (
+    rev_date date,
+    rev_revenue int,
+    rev_guestNumber int
+)
 
