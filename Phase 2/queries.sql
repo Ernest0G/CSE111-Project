@@ -160,3 +160,9 @@ SELECT s_name, AVG(f_rating), MAX(f_rating), MIN(f_rating)
 FROM staff
 JOIN feedback ON f_staffID = s_ID
 GROUP BY s_name;
+
+-- 21) Huy Vu
+-- Change the room cost of room number 25 to $500. Hotel manager wants to increases the price.
+UPDATE room
+SET r_pricePerNight = 500
+WHERE r_roomNumber = 25
