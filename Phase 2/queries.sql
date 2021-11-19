@@ -135,7 +135,7 @@ WHERE cb_foodName = "Pizza";
 -- Guest number 25 does not like having a mouse in his room. 
 --Therefore, change the feedback to “A mouse is in the room. Would not recommend the hotel!”
 UPDATE feedback
-SET f_comment = "A mouse is in the room. Would not recommend the hotel!"
+SET f_comment = "A mouse is in the room. Would not recommend the hotel!", f_rating = 2
 WHERE f_guestNumber = 25;
 
 -- 19) Ernesto Gutierrez
@@ -166,3 +166,21 @@ GROUP BY s_name;
 UPDATE room
 SET r_pricePerNight = 500
 WHERE r_roomNumber = 25;
+
+
+-- 22) 
+-- AVG booking days for each room
+SELECT r_roomNumber,AVG(b_daysBooked)
+FROM booking
+JOIN room on r_roomNumber = b_roomNumber
+JOIN guest on g_guestNumber = b_roomNumber
+GROUP BY r_roomNumber
+
+-- 23) 
+-- Amount of food bought for each food
+SELECT c_name, COUNT(cb_foodName)
+from catering
+JOIN cateringBill on c_name = cb_foodName
+JOIN guest on g_guestNumber = cb_guestNumber
+GROUP BY c_name
+
