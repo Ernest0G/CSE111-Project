@@ -4,12 +4,9 @@ html,body{
     overflow-x: hidden;
 }
 
-.banner{
-    background-color: beige;
+.display-4{
     width: 100%;
-    height: 12%;
     text-align: center;
-    
 }
 
 .btn-group,.btn-group-toggle{
@@ -18,11 +15,20 @@ html,body{
     flex-wrap: wrap;
     justify-content: center;
     align-content: space-between;
-    margin: 10px;
+    background-color: white;
 }
 
 
 .btn-primary{
-    width: 150px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
+    background-color: rgb(255, 255, 255);
+    color: black;
 }
+
+.content-container{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(219, 216, 216);
+}
+
