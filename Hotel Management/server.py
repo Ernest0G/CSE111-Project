@@ -1,4 +1,5 @@
 from flask import Flask,render_template
+import sqlite3
 
 app = Flask(__name__)
 
@@ -10,4 +11,5 @@ def index():
 
 
 if __name__ == '__main__':
+    con = sqlite3.connect('data.sqlite')
     app.run(host='localhost', port=5000, debug=True)
