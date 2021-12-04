@@ -95,7 +95,7 @@ def showBooking():
     return jsonify(data)
 
 @app.route('/viewRooms/showFilteredRooms/<roomFilters>', methods = ['GET'],endpoint = 'showFilteredRooms')
-def showBooking(roomFilters):
+def showFilteredRooms(roomFilters):
     global conn
     
     print(roomFilters)
