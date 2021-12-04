@@ -134,6 +134,42 @@ def showCateringBill():
 
     return jsonify(data)
 
+@app.route('/viewGuests/showGuests', methods = ['GET'],endpoint = 'showGuests')
+def showGuests():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT * FROM guest GROUP BY g_guestNumber"""
+    cur.execute(sql)
+    rows = cur.fetchall()
+
+    print(rows)
+
+    
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
+@app.route('/viewGuests/showGuests/<guestName>', methods = ['POST'],endpoint = 'editGuests')
+def editGuests():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT * FROM guest GROUP BY g_guestNumber"""
+    cur.execute(sql)
+    rows = cur.fetchall()
+
+    print(rows)
+
+    
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
 if __name__ == '__main__':
     
 

@@ -173,12 +173,12 @@ function showCateringMenu() {
     xhttp.send();
 
     xhttp.onload = function () {
-        let rooms = {};
-        rooms = this.responseText;
-        console.log(rooms);
-        let roomsParsed = JSON.parse(rooms);
+        let catering = {};
+        catering = this.responseText;
+        console.log(catering);
+        let cateringParsed = JSON.parse(catering);
 
-        console.log(roomsParsed);
+        console.log(cateringParsed);
 
         let t = '<tbody>'
         t += '<table class="table table-bordered table-striped">'
@@ -187,10 +187,10 @@ function showCateringMenu() {
         t += '<th>' + 'Price' + '</td>';
         t += '<th>' + 'Type' + '</td>';
         t += '</tr>';
-        for (i in roomsParsed) {
+        for (i in cateringParsed) {
             t += '<tr>';
-            for (j in roomsParsed[i]) {
-                t += '<td>' + roomsParsed[i][j] + '</td>';
+            for (j in cateringParsed[i]) {
+                t += '<td>' + cateringParsed[i][j] + '</td>';
             }
             t += '</tr>';
         }
@@ -208,12 +208,12 @@ function showCateringBill() {
     xhttp.send();
 
     xhttp.onload = function () {
-        let rooms = {};
-        rooms = this.responseText;
-        console.log(rooms);
-        let roomsParsed = JSON.parse(rooms);
+        let catering = {};
+        catering = this.responseText;
+        console.log(catering);
+        let cateringParsed = JSON.parse(catering);
 
-        console.log(roomsParsed);
+        console.log(cateringParsed);
 
         let t = '<tbody>'
         t += '<table class="table table-bordered table-striped">'
@@ -223,10 +223,10 @@ function showCateringBill() {
         t += '<th>' + 'Food Name' + '</td>';
         t += '<th>' + 'Price' + '</td>';
         t += '</tr>';
-        for (i in roomsParsed) {
+        for (i in cateringParsed) {
             t += '<tr>';
-            for (j in roomsParsed[i]) {
-                t += '<td>' + roomsParsed[i][j] + '</td>';
+            for (j in cateringParsed[i]) {
+                t += '<td>' + cateringParsed[i][j] + '</td>';
             }
             t += '</tr>';
         }
@@ -234,6 +234,54 @@ function showCateringBill() {
         t += '</table>'
         t += '</tbody>';
         document.getElementById('catering-table').innerHTML = t;
+
+    };
+}
+
+function showGuests() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:5000/viewGuests/showGuests", true);
+    xhttp.send();
+
+    xhttp.onload = function () {
+        let guests = {};
+        guests = this.responseText;
+        console.log(guests);
+        let guestsParsed = JSON.parse(guests);
+
+        console.log(guestsParsed);
+
+        let t = '<tbody>'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Guest Number' + '</td>';
+        t += '<th>' + 'Name' + '</td>';
+        t += '<th>' + 'Phone Number' + '</td>';
+        t += '<th>' + 'Email' + '</td>';
+        t += '<th>' + 'Guest Count' + '</td>';
+        t += '</tr>';
+        for (i in guestsParsed) {
+            t += '<tr>';
+            for (j in guestsParsed[i]) {
+                t += '<td>' + guestsParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('guests-table').innerHTML = t;
+
+    };
+}
+
+function addGuest(guestName) {
+    var xhttp = new XMLHttpRequest();
+    url = "http://localhost:5000/viewGuests/showGuests" + "/" + guestName
+    xhttp.open("POST", url, true);
+    xhttp.send();
+
+    xhttp.onload = function () {
 
     };
 }
