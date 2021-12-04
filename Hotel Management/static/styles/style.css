@@ -2,6 +2,7 @@ html,body{
     width: 100%;
     height: 100%;
     overflow-x: hidden;
+    overflow-y: hidden ;
 }
 
 .display-4{
@@ -30,6 +31,7 @@ html,body{
     width: 100%;
     height: 100%;
     display: flex;
+    overflow-y: scroll;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
@@ -43,6 +45,11 @@ html,body{
 
 .table{
     width: 100%;
+    
+}
+
+.table-container{
+    overflow-y: scroll;
 }
 
 .view-rooms-options{

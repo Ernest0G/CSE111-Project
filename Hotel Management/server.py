@@ -5,22 +5,24 @@ from sqlite3.dbapi2 import Cursor
 import json
 
 app = Flask(__name__)
+conn = sqlite3.connect("data.sqlite",check_same_thread=False)
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/viewRooms/showAllRooms', methods = ['GET'],endpoint = 'showAllRooms')
-def showStudentClasses():
-    try:
-        sql = """SELECT * FROM room GROUP BY r_roomNumber"""
-        Cursor.execute(sql)
+def showAllRooms():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT * FROM room GROUP BY r_roomNumber"""
+    cur.execute(sql)
+    rows = cur.fetchall()
 
-        rows = Cursor.fetchall()
+    print(rows)
 
-        print(rows)
-    except Error as e:
-        print(e)  
     
     data = []
     for row in rows:
@@ -28,8 +30,75 @@ def showStudentClasses():
 
     return jsonify(data)
 
+@app.route('/viewRooms/showOpenRooms', methods = ['GET'],endpoint = 'showOpenRooms')
+def showOpenRooms():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT *
+                FROM room
+                WHERE r_roomNumber NOT IN 
+                (
+                    SELECT b_roomNumber as r_roomNumber
+                    FROM booking
+                );
+            """
+    cur.execute(sql)
+    rows = cur.fetchall()
+
+    print(rows)
+
+    
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
+@app.route('/viewRooms/showBookedRooms', methods = ['GET'],endpoint = 'showBookedRooms')
+def showBookedRooms():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT *
+                FROM room
+                WHERE r_roomNumber IN 
+                (
+                    SELECT b_roomNumber as r_roomNumber
+                    FROM booking
+                );
+            """
+    cur.execute(sql)
+    rows = cur.fetchall()
+
+    print(rows)
+
+    
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
+@app.route('/viewRooms/showBooking', methods = ['GET'],endpoint = 'showBooking')
+def showBooking():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT * FROM booking GROUP BY b_guestNumber"""
+    cur.execute(sql)
+    rows = cur.fetchall()
+
+    print(rows)
+
+    
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
 
 if __name__ == '__main__':
-    connection = sqlite3.connect("data.sqlite")
+    
 
     app.run(host='localhost', port=5000, debug=True)
