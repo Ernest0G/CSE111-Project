@@ -98,6 +98,42 @@ def showBooking():
 
     return jsonify(data)
 
+@app.route('/viewCatering/showCateringMenu', methods = ['GET'],endpoint = 'showCateringMenu')
+def showBooking():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT * FROM catering GROUP BY c_name"""
+    cur.execute(sql)
+    rows = cur.fetchall()
+
+    print(rows)
+
+    
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
+@app.route('/viewCatering/showCateringBill', methods = ['GET'],endpoint = 'showCateringBill')
+def showCateringBill():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT * FROM cateringBill GROUP BY cb_id"""
+    cur.execute(sql)
+    rows = cur.fetchall()
+
+    print(rows)
+
+    
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
 if __name__ == '__main__':
     
 
