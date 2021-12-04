@@ -10,9 +10,6 @@ function openTab(tabName) {
     document.getElementById(tabName).style.display = "block"
 }
 
-function closeView(tabeName) {
-
-}
 
 function roomOptions(optionChosen) {
     if (optionChosen == "openRooms") {
@@ -28,10 +25,8 @@ function showAllRooms() {
     xhttp.onload = function () {
         let rooms = {};
         rooms = this.responseText;
-        console.log(rooms);
         let roomsParsed = JSON.parse(rooms);
 
-        console.log(roomsParsed);
 
         let t = '<tbody class="table">'
         t += '<table class="table table-bordered table-striped">'
@@ -65,10 +60,8 @@ function showOpenRooms() {
     xhttp.onload = function () {
         let rooms = {};
         rooms = this.responseText;
-        console.log(rooms);
         let roomsParsed = JSON.parse(rooms);
 
-        console.log(roomsParsed);
 
         let t = '<tbody>'
         t += '<table class="table table-bordered table-striped">'
@@ -102,10 +95,8 @@ function showBookedRooms() {
     xhttp.onload = function () {
         let rooms = {};
         rooms = this.responseText;
-        console.log(rooms);
         let roomsParsed = JSON.parse(rooms);
 
-        console.log(roomsParsed);
 
         let t = '<tbody>'
         t += '<table class="table table-bordered table-striped">'
@@ -139,10 +130,7 @@ function showBooking() {
     xhttp.onload = function () {
         let rooms = {};
         rooms = this.responseText;
-        console.log(rooms);
         let roomsParsed = JSON.parse(rooms);
-
-        console.log(roomsParsed);
 
         let t = '<tbody>'
         t += '<table class="table table-bordered table-striped">'
@@ -167,6 +155,50 @@ function showBooking() {
     };
 }
 
+function submitRoomFilters() {
+    var bedCount = document.getElementById("filter-bed-count").value;
+    var roomCap = document.getElementById("filter-room-cap").value;
+    var roomType = document.getElementById("filter-room-type").value;
+
+    var roomFilters = { bedCount, roomCap, roomType };
+    var xhttp = new XMLHttpRequest();
+    url = "http://localhost:5000/viewRooms/showFilteredRooms/" + roomFilters;
+    xhttp.open("GET", url, true);
+    xhttp.send(JSON.stringify(roomFilters));
+
+    xhttp.onload = function () {
+        let rooms = {};
+        rooms = this.responseText;
+        console.log(rooms);
+        let roomsParsed = JSON.parse(rooms);
+        console.log(roomsParsed);
+
+
+        let t = '<tbody>'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Room Number' + '</td>';
+        t += '<th>' + 'Bed Count' + '</td>';
+        t += '<th>' + 'Room Capacity' + '</td>';
+        t += '<th>' + 'Room Type' + '</td>';
+        t += '<th>' + 'Room Price (per night)' + '</td>';
+        t += '</tr>';
+        for (i in roomsParsed) {
+            t += '<tr>';
+            for (j in roomsParsed[i]) {
+                t += '<td>' + roomsParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('room-table').innerHTML = t;
+
+    };
+
+}
+
 function showCateringMenu() {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "http://localhost:5000/viewCatering/showCateringMenu", true);
@@ -175,10 +207,8 @@ function showCateringMenu() {
     xhttp.onload = function () {
         let catering = {};
         catering = this.responseText;
-        console.log(catering);
         let cateringParsed = JSON.parse(catering);
 
-        console.log(cateringParsed);
 
         let t = '<tbody>'
         t += '<table class="table table-bordered table-striped">'
@@ -210,10 +240,8 @@ function showCateringBill() {
     xhttp.onload = function () {
         let catering = {};
         catering = this.responseText;
-        console.log(catering);
         let cateringParsed = JSON.parse(catering);
 
-        console.log(cateringParsed);
 
         let t = '<tbody>'
         t += '<table class="table table-bordered table-striped">'
@@ -246,10 +274,8 @@ function showGuests() {
     xhttp.onload = function () {
         let guests = {};
         guests = this.responseText;
-        console.log(guests);
         let guestsParsed = JSON.parse(guests);
 
-        console.log(guestsParsed);
 
         let t = '<tbody>'
         t += '<table class="table table-bordered table-striped">'

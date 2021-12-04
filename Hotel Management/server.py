@@ -21,7 +21,6 @@ def showAllRooms():
     cur.execute(sql)
     rows = cur.fetchall()
 
-    print(rows)
 
     
     data = []
@@ -46,7 +45,6 @@ def showOpenRooms():
     cur.execute(sql)
     rows = cur.fetchall()
 
-    print(rows)
 
     
     data = []
@@ -71,7 +69,6 @@ def showBookedRooms():
     cur.execute(sql)
     rows = cur.fetchall()
 
-    print(rows)
 
     
     data = []
@@ -89,9 +86,28 @@ def showBooking():
     cur.execute(sql)
     rows = cur.fetchall()
 
-    print(rows)
 
     
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
+@app.route('/viewRooms/showFilteredRooms/<roomFilters>', methods = ['GET'],endpoint = 'showFilteredRooms')
+def showBooking(roomFilters):
+    global conn
+    
+    print(roomFilters)
+
+    cur = conn.cursor()
+    sql = """SELECT * 
+            FROM room
+            WHERE r_beds = ? AND r_roomCapacity = ? AND r_type = ?"""
+    args =(roomFilters[0],roomFilters[1],roomFilters[2])
+    cur.execute(sql,args)
+    rows = cur.fetchall()
+
     data = []
     for row in rows:
         data.append(list(row))
@@ -107,7 +123,6 @@ def showBooking():
     cur.execute(sql)
     rows = cur.fetchall()
 
-    print(rows)
 
     
     data = []
@@ -125,7 +140,6 @@ def showCateringBill():
     cur.execute(sql)
     rows = cur.fetchall()
 
-    print(rows)
 
     
     data = []
@@ -143,7 +157,6 @@ def showGuests():
     cur.execute(sql)
     rows = cur.fetchall()
 
-    print(rows)
 
     
     data = []
@@ -161,7 +174,6 @@ def editGuests():
     cur.execute(sql)
     rows = cur.fetchall()
 
-    print(rows)
 
     
     data = []

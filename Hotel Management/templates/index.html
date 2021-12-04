@@ -36,12 +36,56 @@
             <button type="button" class="button" onclick="showBooking()">
                 Show Booking
             </button>
+            <button type="button" class="button" data-toggle="modal" data-target="#booking-modal">
+                Additional Filters
+            </button>
             <button type="button" class="button" onclick="">
                 Edit Booking
             </button>
         </div>
         <div class="table-container" id="room-table">
             <!--Table Generated Here-->
+        </div>
+    </div>
+
+    <div class="modal fade" id="booking-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="booking-modal-label">Filters</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="filter-bed-count">Filter Bed Count:</label>
+                    <select class="form-control form-control-sm" id="filter-bed-count">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    <label for="filter-room-cap">Filter Room Capacity:</label>
+                    <select class="form-control form-control-sm" id="filter-room-cap">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    <label for="filter-room-type">Filter Room Type:</label>
+                    <select class="form-control form-control-sm" id="filter-room-type">
+                        <option value="Single">Single</option>
+                        <option value="Double">Double</option>
+                        <option value="Triple">Triple</option>
+                        <option value="Quad">Quad</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="submitRoomFilters()">Submit</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -77,5 +121,14 @@
     </div>
 
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <script src="{{ url_for('static',filename='javascript/hotel.js') }}"></script>
 </body>
