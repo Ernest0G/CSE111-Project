@@ -161,9 +161,10 @@ function submitRoomFilters() {
     var roomType = document.getElementById("filter-room-type").value;
 
     var roomFilters = { bedCount, roomCap, roomType };
+    console.log(roomFilters);
     var xhttp = new XMLHttpRequest();
-    url = "http://localhost:5000/viewRooms/showFilteredRooms/" + roomFilters;
-    xhttp.open("GET", url, true);
+    xhttp.open("POST", "http://localhost:5000/viewRooms/showFilteredRooms", true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(roomFilters));
 
     xhttp.onload = function () {

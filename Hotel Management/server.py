@@ -1,8 +1,10 @@
-from flask import Flask,render_template, jsonify
+from flask import Flask,render_template, jsonify, request
 import sqlite3
 from sqlite3 import Error
 from sqlite3.dbapi2 import Cursor
 import json
+
+from flask.wrappers import Request
 
 app = Flask(__name__)
 conn = sqlite3.connect("data.sqlite",check_same_thread=False)
@@ -94,17 +96,19 @@ def showBooking():
 
     return jsonify(data)
 
-@app.route('/viewRooms/showFilteredRooms/<roomFilters>', methods = ['GET'],endpoint = 'showFilteredRooms')
-def showFilteredRooms(roomFilters):
+@app.route('/viewRooms/showFilteredRooms', methods = ['POST'],endpoint = 'showFilteredRooms')
+def showFilteredRooms():
     global conn
     
+    roomFilters = {}
+    roomFilters.update(request.get_json())
     print(roomFilters)
 
     cur = conn.cursor()
     sql = """SELECT * 
             FROM room
             WHERE r_beds = ? AND r_roomCapacity = ? AND r_type = ?"""
-    args =(roomFilters[0],roomFilters[1],roomFilters[2])
+    args =(roomFilters['bedCount'],roomFilters['roomCap'],roomFilters['roomType'])
     cur.execute(sql,args)
     rows = cur.fetchall()
 
