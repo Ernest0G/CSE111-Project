@@ -161,10 +161,9 @@ function submitRoomFilters() {
     var roomType = document.getElementById("filter-room-type").value;
 
     var roomFilters = { bedCount, roomCap, roomType };
-    console.log(roomFilters);
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:5000/viewRooms/showFilteredRooms", true);
-    xhttp.setRequestHeader('Content-Type', 'application/json');
+    url = "http://localhost:5000/viewRooms/showFilteredRooms/" + roomFilters;
+    xhttp.open("GET", url, true);
     xhttp.send(JSON.stringify(roomFilters));
 
     xhttp.onload = function () {
@@ -231,6 +230,47 @@ function showCateringMenu() {
         document.getElementById('catering-table').innerHTML = t;
 
     };
+}
+function submitCateringFilters() {
+    var foodType = document.getElementById("filter-food-type").value;
+    var foodPrice = document.getElementById("filter-food-price").value;
+    var mealType = document.getElementById("filter-meal-type").value;
+
+    var cateringFilters = { foodType, foodPrice, mealType };
+    var xhttp = new XMLHttpRequest();
+    url = "http://localhost:5000/viewCatering/showFilteredCatering/" + cateringFilters;
+    xhttp.open("GET", url, true);
+    xhttp.send(JSON.stringify(cateringFilters));
+
+    xhttp.onload = function () {
+        let catering = {};
+        catering = this.responseText;
+        console.log(catering);
+        let cateringParsed = JSON.parse(catering);
+        console.log(cateringParsed);
+
+
+        let t = '<tbody>'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Food Type' + '</td>';
+        t += '<th>' + 'Food Price' + '</td>';
+        t += '<th>' + 'Meal Type' + '</td>';
+        t += '</tr>';
+        for (i in cateringParsed) {
+            t += '<tr>';
+            for (j in cateringParsed[i]) {
+                t += '<td>' + cateringParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('catering-table').innerHTML = t;
+
+    };
+
 }
 
 function showCateringBill() {
@@ -301,7 +341,47 @@ function showGuests() {
 
     };
 }
+function submitGuestFilters() {
+    var guestNumber = document.getElementById("filter-guest-number").value;
+    var guestName = document.getElementById("filter-guest-name").value;
+    var guestCount = document.getElementById("filter-guest-count").value;
 
+    var guestsFilters = { guestNumber, guestName,guestCount };
+    var xhttp = new XMLHttpRequest();
+    url = "http://localhost:5000/viewGuests/showFilteredGuests/" + guestsFilters;
+    xhttp.open("GET", url, true);
+    xhttp.send(JSON.stringify(guestsFilters));
+
+    xhttp.onload = function () {
+        let guests = {};
+        guests = this.responseText;
+        console.log(guests);
+        let guestsParsed = JSON.parse(guests);
+        console.log(guestsParsed);
+
+
+        let t = '<tbody>'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Guest ID' + '</td>';
+        t += '<th>' + 'Guest Name' + '</td>';
+        t += '<th>' + 'Guest Count' + '</td>';
+        t += '</tr>';
+        for (i in guestsParsed) {
+            t += '<tr>';
+            for (j in guestsParsed[i]) {
+                t += '<td>' + guestsParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('guests-table').innerHTML = t;
+
+    };
+
+}
 function addGuest(guestName) {
     var xhttp = new XMLHttpRequest();
     url = "http://localhost:5000/viewGuests/showGuests" + "/" + guestName
