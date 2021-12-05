@@ -37,7 +37,13 @@
                 Show Booking
             </button>
             <button type="button" class="button" data-toggle="modal" data-target="#booking-modal">
-                Additional Filters
+                Additional Filters For Booking
+            </button>
+            <button type="button" class="button" data-toggle="modal" data-target="#catering-modal">
+                Additional Filters For Catering
+            </button>
+            <button type="button" class="button" data-toggle="modal" data-target="#guest-modal">
+                Additional Filters For Guests
             </button>
             <button type="button" class="button" onclick="">
                 Edit Booking
@@ -106,6 +112,70 @@
         </div>
     </div>
 
+    <div class="modal fade" id="catering-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="catering-modal-label">Filters</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="filter-food-type">Filter Food type:</label>
+                    <select class="form-control form-control-sm" id="filter-food-type">
+                        <option value="Bacon">Bacon</option>
+                        <option value="Breakfast Burrito">Breakfast Burrito</option>
+                        <option value="Cake">Cake</option>
+                        <option value="Cereal">Cereal</option>
+                        <option value="Chicken Sandwich">Chicken Sandwich</option>
+                        <option value="Chicken Soup">Chicken Soup</option>
+                        <option value="Eggs">Eggs</option>
+                        <option value="French Toast">French Toast</option>
+                        <option value="Hamburger">Hamburger</option>
+                        <option value="Ice Cream">Ice Cream</option>
+                        <option value="Lasagna">Lasagna</option>
+                        <option value="Loaded Baked Potatoe">Loaded Baked Potatoe</option>
+                        <option value="Nachos">Nachos</option>
+                        <option value="Pancakes">Pancakes</option>
+                        <option value="Pie">Pie</option>
+                        <option value="Pizza">Pizza</option>
+                        <option value="Ribs">Ribs</option>
+                        <option value="Salad">Salad</option>
+                        <option value="Salmon">Salmon</option>
+                        <option value="Shrimp Rice Bowl">Shrimp Rice Bowl</option>
+                        <option value="Steak">Steak/option>
+                        <option value="Tacos">Tacos</option>
+                        <option value="Waffles">Waffles</option>
+                    </select>
+                    <label for="filter-food-price">Filter Food Price:</label>
+                    <select class="form-control form-control-sm" id="filter-food-price">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                    <label for="filter-meal-type">Filter Meal Type:</label>
+                    <select class="form-control form-control-sm" id="filter-meal-type">
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="submitCateringFilters()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="content-container" id="view-guests">
         <div class="view-rooms-options">
             <button type="button" class="button" onclick="showGuests()">
@@ -117,6 +187,94 @@
         </div>
         <div class="table container" id="guests-table">
             <!--Table Generated Here-->
+        </div>
+    </div>
+    
+    <div class="modal fade" id="guest-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="guest-modal-label">Filters</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="filter-guest-number">Filter Guest ID:</label>
+                    <select class="form-control form-control-sm" id="filter-guest-number">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                    </select>
+                    <label for="filter-guest-name">Filter Guest's Name:</label>
+                    <select class="form-control form-control-sm" id="filter-guest-name">
+                        <option value="Alisha Pratt">Alisha Pratt</option>
+                        <option value="Ben Gregory">Ben Gregory</option>
+                        <option value="Blake Dudley">Blake Dudley</option>
+                        <option value="Brenna Wyatt">Brenna Wyatt</option>
+                        <option value="Cadence Russell">Cadence Russell</option>
+                        <option value="Colby Howe">Colby Howe</option>
+                        <option value="Deandre Montgomery">Deandre Montgomery</option>
+                        <option value="Desmond Benton">Desmond Benton</option>
+                        <option value="Ernesto Gutierrez">Ernesto Gutierrez</option>
+                        <option value="Karen Erickson">Karen Erickson</option>
+                        <option value="Kathy Ellison">Kathy Ellison</option>
+                        <option value="Keenan Webb">Keenan Webb</option>
+                        <option value="Lorelei Vincent">Lorelei Vincent</option>
+                        <option value="Luca Maron">Luca Maron</option>
+                        <option value="Makhi Navarro">Makhi Navarro</option>
+                        <option value="Mattie Bender">Mattie Bender</option>
+                        <option value="Nelson Miranda">Nelson Miranda</option>
+                        <option value="Sage Burke">Sage Burke</option>
+                        <option value="Shannon Compton">Shannon Compton</option>
+                        <option value="Shaylee Oliver">Shaylee Oliver</option>
+                        <option value="Skylar Dorsey">Skylar Dorsey</option>
+                        <option value="Wayne Mcclure">Wayne Mcclure</option>
+                        <option value="Yasmine Haynes">Cadence Russell</option>
+                        <option value="Zachery Morse">Zachery Morse</option>
+                        <option value="Zaniyah Rasmussen">Zaniyah Rasmussen</option>
+                        <option value="Zara Mills">Zara Mills</option>
+                    </select>
+                    <label for="filter-guest-count">Filter Guest Count:</label>
+                    <select class="form-control form-control-sm" id="filter-guest-count">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="submitGuestFilters()">Submit</button>
+                </div>
+            </div>
         </div>
     </div>
 
