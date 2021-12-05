@@ -392,3 +392,129 @@ function addGuest(guestName) {
 
     };
 }
+function showAllStaff() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:5000/viewStaff/showAllStaff", true);
+    xhttp.send();
+
+    xhttp.onload = function () {
+        let staff = {};
+        staff = this.responseText;
+        let staffParsed = JSON.parse(staff);
+
+
+        let t = '<tbody class="table">'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Staff ID' + '</td>';
+        t += '<th>' + 'Staff Name' + '</td>';
+        t += '<th>' + 'Staff Job Title' + '</td>';
+        t += '</tr>';
+        for (i in staffParsed) {
+            t += '<tr>';
+            for (j in staffParsed[i]) {
+                t += '<td>' + staffParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('staff-table').innerHTML = t;
+
+    };
+function showAllStaff() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:5000/viewStaff/showAllStaff", true);
+    xhttp.send();
+
+    xhttp.onload = function () {
+        let staff = {};
+        staff = this.responseText;
+        let staffParsed = JSON.parse(staff);
+
+
+        let t = '<tbody class="table">'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Staff ID' + '</td>';
+        t += '<th>' + 'Staff Name' + '</td>';
+        t += '<th>' + 'Staff Job Title' + '</td>';
+        t += '</tr>';
+        for (i in staffParsed) {
+            t += '<tr>';
+            for (j in staffParsed[i]) {
+                t += '<td>' + staffParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('staff-table').innerHTML = t;
+
+    };
+function showAllStaff() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:5000/viewStaff/showAllStaff", true);
+    xhttp.send();
+
+    xhttp.onload = function () {
+        let staff = {};
+        staff = this.responseText;
+        let staffParsed = JSON.parse(staff);
+
+
+        let t = '<tbody class="table">'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Staff ID' + '</td>';
+        t += '<th>' + 'Staff Name' + '</td>';
+        t += '<th>' + 'Staff Job Title' + '</td>';
+        t += '</tr>';
+        for (i in staffParsed) {
+            t += '<tr>';
+            for (j in staffParsed[i]) {
+                t += '<td>' + staffParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('staff-table').innerHTML = t;
+
+    };
+function showStaffFeedback() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:5000/viewStaff/showStaffFeedback", true);
+    xhttp.send();
+
+    xhttp.onload = function () {
+        let staff = {};
+        staff = this.responseText;
+        let staffParsed = JSON.parse(staff);
+
+
+        let t = '<tbody class="table">'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Staff ID' + '</td>';
+        t += '<th>' + 'Staff Name' + '</td>';
+        t += '<th>' + 'Staff Job Title' + '</td>';
+        t += '<th>' + 'Feedback from Guest' + '</td>';
+        t += '</tr>';
+        for (i in staffParsed) {
+            t += '<tr>';
+            for (j in staffParsed[i]) {
+                t += '<td>' + staffParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('staff-table').innerHTML = t;
+
+    };
+}
