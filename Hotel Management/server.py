@@ -221,7 +221,39 @@ def editGuests():
         data.append(list(row))
 
     return jsonify(data)
+@app.route('/viewStaff/showAllStaff', methods = ['GET'],endpoint = 'showAllStaff')
+def showAllStaff():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT * from staff"""
+    cur.execute(sql)
+    rows = cur.fetchall()
 
+
+    
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
+@app.route('/viewStaff/showStaffFeedback', methods = ['GET'],endpoint = 'showStaffFeedback')
+def showStaffFeedback():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT s_ID, s_name, s_jobTitle, f_comment FROM staff, feedback WHERE s_ID = f_staffID;"""
+    cur.execute(sql)
+    rows = cur.fetchall()
+
+
+    
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
 if __name__ == '__main__':
     
 
