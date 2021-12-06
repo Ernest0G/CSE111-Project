@@ -36,11 +36,11 @@
             <button type="button" class="button" onclick="showBooking()">
                 Show Booking
             </button>
-            <button type="button" class="button" data-toggle="modal" data-target="#booking-modal">
+            <button type="button" class="button" data-toggle="modal" data-target="#rooms-modal">
                 Additional Filters
             </button>
-            <button type="button" class="button" onclick="">
-                Edit Booking
+            <button type="button" class="button" data-toggle="modal" data-target="#booking-modal">
+                Create Booking
             </button>
         </div>
         <div class="table-container" id="room-table">
@@ -48,7 +48,198 @@
         </div>
     </div>
 
+    <div class="modal fade" id="rooms-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rooms-modal-label">Filters</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="filter-bed-count">Filter Bed Count:</label>
+                    <select class="form-control form-control-sm" id="filter-bed-count">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="ALL">ALL</option>
+                    </select>
+                    <label for="filter-room-cap">Filter Room Capacity:</label>
+                    <select class="form-control form-control-sm" id="filter-room-cap">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="ALL">ALL</option>
+                    </select>
+                    <label for="filter-room-type">Filter Room Type:</label>
+                    <select class="form-control form-control-sm" id="filter-room-type">
+                        <option value="Single">Single</option>
+                        <option value="Double">Double</option>
+                        <option value="Triple">Triple</option>
+                        <option value="Quad">Quad</option>
+                        <option value="ALL">ALL</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="submitRoomFilters()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="booking-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="booking-modal-label">Create Booking</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="book-guest-id">Enter Guest Number:
+                        <input type="text" class="form-control" id="book-guest-id" required>
+                    </label>
+                    <label for="book-room-number">Enter Room Number:
+                        <input type="text" class="form-control" id="book-room-number" required>
+                    </label>
+                    <label for="book-date">Select Date to Book:
+                        <input type='date' id='book-date'>
+                    </label>
+                    <label for="book-days">Enter Booking days:
+                        <input type="text" class="form-control" id="book-days" required>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="addBooking()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-container" id="view-catering">
+        <div class="view-rooms-options">
+            <button type="button" class="button" onclick="showCateringMenu()">
+                Show Catering Menu
+            </button>
+            <button type="button" class="button" onclick="showCateringBill()">
+                Show Catering Bill
+            </button>
+            <button type="button" class="button" onclick="showCateringStats()">
+                Show Catering Stats
+            </button>
+            <button type="button" class="button" data-toggle="modal" data-target="#catering-modal">
+                Create Catering Bill
+            </button>
+        </div>
+        <div class="table container" id="catering-table">
+            <!--Table Generated Here-->
+        </div>
+    </div>
+
+    <div class="modal fade" id="catering-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="catering-modal-label">Create Catering Bill</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="catering-guest-number">Enter Bill Id:
+                        <input type="text" class="form-control" id="catering-bill-id" required>
+                    </label>
+                    <label for="catering-guest-number">Enter Guest Number:
+                        <input type="text" class="form-control" id="catering-guest-number" required>
+                    </label>
+                    <label for="catering-food">Enter Food Nane:
+                        <input type="text" class="form-control" id="catering-food" required>
+                    </label>
+                    <label for="catering-price">Enter Price:
+                        <input type="text" class="form-control" id="catering-price" required>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="createCateringBill()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-container" id="view-guests">
+        <div class="view-rooms-options">
+            <button type="button" class="button" onclick="showGuests()">
+                Show Guests
+            </button>
+            <button type="button" class="button" onclick="showGuestEdit()">
+                Edit Guests
+            </button>
+        </div>
+        <div class="table container" id="guests-table">
+            <!--Table Generated Here-->
+        </div>
+    </div>
+
+    <div class="content-container" id="view-staff">
+        <div class="view-rooms-options">
+            <button type="button" class="button" onclick="showAllStaff()">
+                Show Staff
+            </button>
+            <button type="button" class="button" onclick="showStaffFeedback()">
+                Show Staff Feedback
+            </button>
+            <button type="button" class="button" data-toggle="modal" data-target="#staff-modal">
+                Additional Staff Filters
+            </button>
+            <button type="button" class="button" data-toggle="modal" data-target="#feedback-modal">
+                Additional Feedback Filters
+            </button>
+        </div>
+        <div class="table container" id="staff-table">
+            <!--Table Generated Here-->
+        </div>
+    </div>
+    <div class="modal fade" id="staff-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="booking-modal-label">Filters</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="name-search">Search By Name:</label>
+                    <div class="form-outline">
+                        <input type="search" id="name-search" class="form-control" aria-label="Search" />
+                    </div>
+                    <label for="filter-staff-job">Filter Staff Job Title:</label>
+                    <select class="form-control form-control-sm" id="filter-staff-job">
+                        <option value="Housekeeper">Housekeeper</option>
+                        <option value="Receptionist">Receptionist</option>
+                        <option value="Cook">Cook</option>
+                        <option value="Waiter">Waiter</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="submitStaffFilters()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="feedback-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,36 +280,7 @@
         </div>
     </div>
 
-    <div class="content-container" id="view-catering">
-        <div class="view-rooms-options">
-            <button type="button" class="button" onclick="showCateringMenu()">
-                Show Catering Menu
-            </button>
-            <button type="button" class="button" onclick="showCateringBill()">
-                Show Catering Bill
-            </button>
-            <button type="button" class="button" onclick="">
-                Edit Catering Bill
-            </button>
-        </div>
-        <div class="table container" id="catering-table">
-            <!--Table Generated Here-->
-        </div>
-    </div>
 
-    <div class="content-container" id="view-guests">
-        <div class="view-rooms-options">
-            <button type="button" class="button" onclick="showGuests()">
-                Show Guests
-            </button>
-            <button type="button" class="button" onclick="showGuestEdit()">
-                Edit Guests
-            </button>
-        </div>
-        <div class="table container" id="guests-table">
-            <!--Table Generated Here-->
-        </div>
-    </div>
 
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

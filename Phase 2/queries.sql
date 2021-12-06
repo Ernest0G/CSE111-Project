@@ -184,3 +184,13 @@ JOIN cateringBill on c_name = cb_foodName
 JOIN guest on g_guestNumber = cb_guestNumber
 GROUP BY c_name
 
+SELECT AVG(c_price)
+FROM catering
+
+SELECT cb_foodName, MAX(popFood)
+FROM
+(
+    SELECT cb_foodName, count(cb_foodName) as popFood
+    FROM cateringBill
+    GROUP BY cb_foodName
+);
