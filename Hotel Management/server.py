@@ -94,24 +94,25 @@ def showBooking():
 
     return jsonify(data)
 
-@app.route('/viewRooms/showFilteredRooms/<roomFilters>', methods = ['GET'],endpoint = 'showFilteredRooms')
-def showFilteredRooms(roomFilters):
+@app.route('/viewRooms/showFilteredRooms', methods = ['POST'],endpoint = 'showFilteredRooms')
+def showFilteredRooms():
     global conn
-    
+
+    roomFilters = {}
+    roomFilters.update(request.get_json())
     print(roomFilters)
 
     cur = conn.cursor()
     sql = """SELECT * 
             FROM room
             WHERE r_beds = ? AND r_roomCapacity = ? AND r_type = ?"""
-    args =(roomFilters[0],roomFilters[1],roomFilters[2])
+    args =(roomFilters['bedCount'],roomFilters['roomCap'],roomFilters['roomType'])
     cur.execute(sql,args)
     rows = cur.fetchall()
 
     data = []
     for row in rows:
         data.append(list(row))
-
     return jsonify(data)
 
 @app.route('/viewCatering/showCateringMenu', methods = ['GET'],endpoint = 'showCateringMenu')
@@ -249,22 +250,6 @@ def editGuests():
         data.append(list(row))
 
     return jsonify(data)
-@app.route('/viewStaff/showAllStaff', methods = ['GET'],endpoint = 'showAllStaff')
-def showAllStaff():
-    global conn
-    
-    cur = conn.cursor()
-    sql = """SELECT * from staff"""
-    cur.execute(sql)
-    rows = cur.fetchall()
-
-
-    
-    data = []
-    for row in rows:
-        data.append(list(row))
-
-    return jsonify(data)
 
 @app.route('/viewStaff/showAllStaff', methods = ['GET'],endpoint = 'showAllStaff')
 def showAllStaff():
@@ -318,7 +303,7 @@ def showFilteredStaff():
     return jsonify(data)
 
 @app.route('/viewCatering/showStats', methods = ['GET'],endpoint = 'showStats')
-def showFilteredStaff():
+def showStats():
 
     data1 = []
     data2 = []
