@@ -371,7 +371,22 @@ def popFood():
         data.append(list(row))
     
     return data
+@app.route('/viewRevenue', methods = ['GET'],endpoint = 'showAllRevenue')
+def showAllRevenue():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT rev_date, rev_revenue FROM revenue"""
+    cur.execute(sql)
+    rows = cur.fetchall()
 
+
+    
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
 if __name__ == '__main__':
     
 
