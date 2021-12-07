@@ -476,7 +476,7 @@ function submitStaffFilters() {
 
 function showAvgFeedbackRating() {
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "http://localhost:5000/viewStaff/showFeedbackRating", true);
+    xhttp.open("GET", "http://localhost:5000/viewStaff/showAvgFeedbackRating", true);
     xhttp.send();
 
     xhttp.onload = function () {
@@ -695,13 +695,13 @@ function showTotalRevenue() {
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", "http://localhost:5000/viewRevenue", true);
         xhttp.send();
-    
+
         xhttp.onload = function () {
             let revenue = {};
-            revenue  = this.responseText;
+            revenue = this.responseText;
             let revenueParsed = JSON.parse(revenue);
-    
-    
+
+
             let t = '<tbody class="table">'
             t += '<table class="table table-bordered table-striped">'
             t += '<tr>';
@@ -715,11 +715,11 @@ function showTotalRevenue() {
                 }
                 t += '</tr>';
             }
-    
+
             t += '</table>'
             t += '</tbody>';
             document.getElementById('revenue-table').innerHTML = t;
-    
+
         };
     }
 }

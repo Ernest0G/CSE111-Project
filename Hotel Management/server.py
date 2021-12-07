@@ -326,7 +326,7 @@ def showFilteredStaff():
     return jsonify(data)
 
 @app.route('/viewStaff/showAvgFeedbackRating',methods = ['GET'],endpoint = 'showAvgFeedbackRating')
-def showFilteredStaff():
+def showAvgFeedbackRating():
     global conn
     
     cur = conn.cursor()
