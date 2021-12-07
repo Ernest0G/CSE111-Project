@@ -23,7 +23,7 @@
 
 
     <div class="content-container" id="view-rooms">
-        <div class="view-rooms-options">
+        <div class="view-options">
             <button type="button" class="button" onclick="showAllRooms()">
                 Show All Rooms
             </button>
@@ -64,7 +64,7 @@
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
-                        <option value="ALL">ALL</option>
+                        <option value="r_beds">Any</option>
                     </select>
                     <label for="filter-room-cap">Filter Room Capacity:</label>
                     <select class="form-control form-control-sm" id="filter-room-cap">
@@ -72,7 +72,7 @@
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
-                        <option value="ALL">ALL</option>
+                        <option value="r_roomCapacity">Any</option>
                     </select>
                     <label for="filter-room-type">Filter Room Type:</label>
                     <select class="form-control form-control-sm" id="filter-room-type">
@@ -80,7 +80,7 @@
                         <option value="Double">Double</option>
                         <option value="Triple">Triple</option>
                         <option value="Quad">Quad</option>
-                        <option value="ALL">ALL</option>
+                        <option value="r_type">Any</option>
                     </select>
                 </div>
                 <div class="modal-footer">
@@ -124,14 +124,15 @@
     </div>
 
     <div class="content-container" id="view-catering">
-        <div class="view-rooms-options">
+        <div class="view-options">
             <button type="button" class="button" onclick="showCateringMenu()">
                 Show Catering Menu
             </button>
             <button type="button" class="button" onclick="showCateringBill()">
                 Show Catering Bill
             </button>
-            <button type="button" class="button" onclick="showCateringStats()">
+            <button type="button" class="button" onclick="showCateringStats()" data-toggle="modal"
+                data-target="#catering-stats-modal">
                 Show Catering Stats
             </button>
             <button type="button" class="button" data-toggle="modal" data-target="#catering-modal">
@@ -174,9 +175,24 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="catering-stats-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div id="pop-food-type">
+
+                </div>
+                <div id="avg-price">
+
+                </div>
+                <div id="pop-food">
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="content-container" id="view-guests">
-        <div class="view-rooms-options">
+        <div class="view-options">
             <button type="button" class="button" onclick="showGuests()">
                 Show Guests
             </button>
@@ -190,7 +206,7 @@
     </div>
 
     <div class="content-container" id="view-staff">
-        <div class="view-rooms-options">
+        <div class="view-options">
             <button type="button" class="button" onclick="showAllStaff()">
                 Show Staff
             </button>
@@ -200,8 +216,8 @@
             <button type="button" class="button" data-toggle="modal" data-target="#staff-modal">
                 Additional Staff Filters
             </button>
-            <button type="button" class="button" data-toggle="modal" data-target="#feedback-modal">
-                Additional Feedback Filters
+            <button type="button" class="button" onclick="showAvgFeedbackRating()">
+                Show Average Feedback For each Staff
             </button>
         </div>
         <div class="table container" id="staff-table">
@@ -218,10 +234,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label for="name-search">Search By Name:</label>
-                    <div class="form-outline">
-                        <input type="search" id="name-search" class="form-control" aria-label="Search" />
-                    </div>
                     <label for="filter-staff-job">Filter Staff Job Title:</label>
                     <select class="form-control form-control-sm" id="filter-staff-job">
                         <option value="Housekeeper">Housekeeper</option>
@@ -239,47 +251,26 @@
         </div>
     </div>
 
-    <div class="modal fade" id="feedback-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="booking-modal-label">Filters</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <label for="filter-bed-count">Filter Bed Count:</label>
-                    <select class="form-control form-control-sm" id="filter-bed-count">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                    <label for="filter-room-cap">Filter Room Capacity:</label>
-                    <select class="form-control form-control-sm" id="filter-room-cap">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                    <label for="filter-room-type">Filter Room Type:</label>
-                    <select class="form-control form-control-sm" id="filter-room-type">
-                        <option value="Single">Single</option>
-                        <option value="Double">Double</option>
-                        <option value="Triple">Triple</option>
-                        <option value="Quad">Quad</option>
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        onclick="submitRoomFilters()">Submit</button>
-                </div>
-            </div>
+
+
+    <div class="content-container" id="view-revenue">
+        <div class="view-options">
+            <button type="button" class="button" onclick="showAllRevenue()">
+                <!-- This is the button that shows revenue-->
+                Show Revenue
+            </button>
+            <button type="button" class="button" onclick="showRevenueByDate()">
+                Show Revenue By Date
+            </button>
+            <button type="button" class="button" onclick="showTotalRevenue()">
+                Show Total Revenue
+            </button>
+
+        </div>
+        <div class="table-container" id="revenue-table">
+            <!--Table Generated Here-->
         </div>
     </div>
-
 
 
     </div>

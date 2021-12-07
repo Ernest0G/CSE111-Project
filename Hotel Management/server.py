@@ -115,6 +115,28 @@ def showFilteredRooms():
         data.append(list(row))
     return jsonify(data)
 
+
+@app.route('/viewRooms/createBooking', methods = ['POST'],endpoint = 'createBooking')
+def createBooking():
+    global conn
+
+    roomFilters = {}
+    roomFilters.update(request.get_json())
+    print(roomFilters)
+
+    cur = conn.cursor()
+    sql = """
+            INSERT INTO booking (b_guestNumber,b_roomNumber, b_dateBooked,b_daysBooked)
+            VALUES (?,?,?,?)"""
+    args =(roomFilters['bedCount'],roomFilters['roomCap'],roomFilters['roomType'])
+    cur.execute(sql,args)
+    rows = cur.fetchall()
+    conn.commit()
+    data = []
+    for row in rows:
+        data.append(list(row))
+    return jsonify(data)
+
 @app.route('/viewCatering/showCateringMenu', methods = ['GET'],endpoint = 'showCateringMenu')
 def showBooking():
     global conn
@@ -132,7 +154,7 @@ def showBooking():
 
     return jsonify(data)
 
-@app.route('/viewCatering/showFilteredCatering/<cateringFilters>', methods = ['GET'],endpoint = 'showFilteredCatering')
+@app.route('/viewCatering/showFilteredCatering', methods = ['GET'],endpoint = 'showFilteredCatering')
 def showFilteredCatering(cateringFilters):
     global conn
     
@@ -186,7 +208,7 @@ def createBill():
 
     sql2 = """SELECT * FROM cateringBill GROUP BY cb_id"""
     cur.execute(sql2)
-
+    conn.commit()
     rows = cur.fetchall()
 
 
@@ -224,7 +246,7 @@ def showFilteredGuests(guestsFilters):
     sql = """SELECT * 
             FROM guest
             WHERE g_guestNumber = ? AND g_name = ? AND g_guestCount = ?"""
-    args =(guestsFilters[0],guestsFilters[1],guestsFilters[2])
+    args =([guestsFilters[0]],guestsFilters[1],guestsFilters[2])
     cur.execute(sql,args)
     rows = cur.fetchall()
 
@@ -281,19 +303,20 @@ def showStaffFeedback():
 
     return jsonify(data)
 
-@app.route('/viewRooms/showFilteredStaff', methods = ['POST'],endpoint = 'showFilteredStaff')
+@app.route('/viewStaff/showFilteredStaff', methods = ['POST'],endpoint = 'showFilteredStaff')
 def showFilteredStaff():
     global conn
     
     staffFilters = {}
     staffFilters.update(request.get_json())
-
+    job = staffFilters['staffJob']
+    
     cur = conn.cursor()
     sql = """SELECT * 
             FROM staff
-            WHERE s_name LIKE ? AND s_jobTitle = ?"""
-    args =(staffFilters['staffName'],staffFilters['staffJob'])
-    cur.execute(sql,args)
+            WHERE s_jobTitle = ?"""
+    print(job)
+    cur.execute(sql,[job])
     rows = cur.fetchall()
 
     data = []
@@ -302,20 +325,26 @@ def showFilteredStaff():
 
     return jsonify(data)
 
-@app.route('/viewCatering/showStats', methods = ['GET'],endpoint = 'showStats')
-def showStats():
+@app.route('/viewStaff/showAvgFeedbackRating',methods = ['GET'],endpoint = 'showAvgFeedbackRating')
+def showFilteredStaff():
+    global conn
+    
+    cur = conn.cursor()
+    sql = """SELECT s_name, s_ID, s_jobTitle,AVG(f_rating)
+            FROM staff, feedback
+            WHERE f_staffID = s_ID
+            GROUP BY s_name"""
+    cur.execute(sql)
+    rows = cur.fetchall()
 
-    data1 = []
-    data2 = []
-    data3 = []
-    data1.append(popFoodForType())
-    data2.append(popFood())
-    data3.append(avgPrice())
-    jsonify(data1,data2,data3)
-    print(data1,data2,data3)
-    return jsonify(data1,data2,data3)
+    data = []
+    for row in rows:
+        data.append(list(row))
 
-def popFoodForType():
+    return jsonify(data)
+
+@app.route('/viewCatering/showPopFoodByType', methods = ['GET'],endpoint = 'showPopFoodByType')
+def showPopFoodByType():
     global conn
 
     cur = conn.cursor()
@@ -337,8 +366,10 @@ def popFoodForType():
     for row in rows:
         data.append(list(row))
     
-    return data
-def avgPrice():
+    return jsonify(data)
+
+@app.route('/viewCatering/showAvgPrice', methods = ['GET'],endpoint = 'showAvgPrice')
+def showAvgPrice():
     cur = conn.cursor()
     sql = """
             SELECT AVG(c_price)
@@ -351,8 +382,9 @@ def avgPrice():
     for row in rows:
         data.append(list(row))
     
-    return data
-def popFood():
+    return jsonify(data)
+@app.route('/viewCatering/showPopFood', methods = ['GET'],endpoint = 'showPopFood')
+def showPopFood():
     cur = conn.cursor()
     sql = """
             SELECT cb_foodName, MAX(popFood)
@@ -370,7 +402,58 @@ def popFood():
     for row in rows:
         data.append(list(row))
     
-    return data
+    return jsonify(data)
+
+@app.route('/viewRevenue/showAllRevenue', methods = ['GET'],endpoint = 'showAllRevenue')
+def showAllRevenue():
+    global conn
+
+    cur = conn.cursor()
+    sql = """SELECT * FROM revenue"""
+    cur.execute(sql)
+    rows = cur.fetchall()
+
+
+
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
+@app.route('/viewRevenue/showRevenueByDate', methods = ['GET'],endpoint = 'showRevenueByDate')
+def showRevenueByDate():
+    global conn
+
+    cur = conn.cursor()
+    sql = """SELECT rev_date,rev_revenue FROM revenue GROUP BY rev_date"""
+    cur.execute(sql)
+    rows = cur.fetchall()
+
+
+
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
+@app.route('/viewRevenue/showTotalRevenue', methods = ['GET'],endpoint = 'showTotalRevenue')
+def showTotalRevenue():
+    global conn
+
+    cur = conn.cursor()
+    sql = """SELECT SUM(rev_revenue) FROM revenue"""
+    cur.execute(sql)
+    rows = cur.fetchall()
+
+
+
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
 
 if __name__ == '__main__':
     

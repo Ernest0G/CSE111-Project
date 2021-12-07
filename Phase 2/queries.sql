@@ -194,3 +194,9 @@ FROM
     FROM cateringBill
     GROUP BY cb_foodName
 );
+
+
+SELECT s_name, s_ID, s_jobTitle,AVG(f_rating)
+FROM staff, feedback
+WHERE f_staffID = s_ID
+GROUP BY s_name

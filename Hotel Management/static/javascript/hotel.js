@@ -436,13 +436,12 @@ function showStaffFeedback() {
 }
 
 function submitStaffFilters() {
-    var staffName = document.getElementById("name-search").value;
     var staffJob = document.getElementById("filter-staff-job").value;
 
-    var staffFilters = { staffName, staffJob };
-    console.log(staffFilters);
+    var staffFilters = { staffJob };
+
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:5000/viewRooms/showFilteredStaff", true);
+    xhttp.open("POST", "http://localhost:5000/viewStaff/showFilteredStaff", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(staffFilters));
 
@@ -450,7 +449,7 @@ function submitStaffFilters() {
         let staff = {};
         staff = this.responseText;
         let staffParsed = JSON.parse(staff);
-
+        console.log(staffParsed)
 
         let t = '<tbody class="table">'
         t += '<table class="table table-bordered table-striped">'
@@ -475,17 +474,220 @@ function submitStaffFilters() {
 
 }
 
-function showCateringStats() {
+function showAvgFeedbackRating() {
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "http://localhost:5000/viewCatering/showStats", true);
+    xhttp.open("GET", "http://localhost:5000/viewStaff/showFeedbackRating", true);
     xhttp.send();
 
     xhttp.onload = function () {
         let staff = {};
         staff = this.responseText;
         let staffParsed = JSON.parse(staff);
+        console.log(staffParsed)
 
-        console.log(staffParsed);
+        let t = '<tbody class="table">'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Staff Name' + '</td>';
+        t += '<th>' + 'Staff ID' + '</td>';
+        t += '<th>' + 'Staff Job Title' + '</td>';
+        t += '<th>' + 'Average Rating' + '</td>';
+        t += '</tr>';
+        for (i in staffParsed) {
+            t += '<tr>';
+            for (j in staffParsed[i]) {
+                t += '<td>' + staffParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
 
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('staff-table').innerHTML = t;
+
+    };
+}
+
+function showPopFoodByType() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:5000/viewCatering/showPopFoodByType", true);
+    xhttp.send();
+
+    xhttp.onload = function () {
+        let catering = {};
+        catering = this.responseText;
+        let cateringParsed = JSON.parse(catering);
+
+        let t = '<h2> Most Bought Food by Food Type </h2>'
+        t += '<tbody class="table">'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Food Name' + '</td>';
+        t += '<th>' + 'Times Bought' + '</td>';
+        t += '<th>' + 'Food Type' + '</td>';
+        t += '</tr>';
+
+        for (i in cateringParsed) {
+            t += '<tr>';
+            for (j in cateringParsed[i]) {
+                t += '<td>' + cateringParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('pop-food-type').innerHTML = t;
+    };
+
+}
+
+function showAvgPrice(t) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:5000/viewCatering/showAvgPrice", true);
+    xhttp.send();
+
+    xhttp.onload = function () {
+        let catering = {};
+        catering = this.responseText;
+        let cateringParsed = JSON.parse(catering);
+
+        let t = '<h2> Average Spent on Food </h2>'
+        t += '<tbody class="table">'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Average' + '</td>';
+        t += '</tr>';
+
+        for (i in cateringParsed) {
+            t += '<tr>';
+            for (j in cateringParsed[i]) {
+                t += '<td>' + cateringParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('avg-price').innerHTML = t;
+    };
+
+}
+
+function showPopFood() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:5000/viewCatering/showPopFood", true);
+    xhttp.send();
+
+    xhttp.onload = function () {
+        let catering = {};
+        catering = this.responseText;
+        let cateringParsed = JSON.parse(catering);
+
+        let t = '<h2> Most Bought Food </h2>'
+        t += '<tbody class="table">'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Top Food Choice' + '</td>';
+        t += '<th>' + 'Times Bought' + '</td>';
+        t += '</tr>';
+
+        for (i in cateringParsed) {
+            t += '<tr>';
+            for (j in cateringParsed[i]) {
+                t += '<td>' + cateringParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('pop-food').innerHTML = t;
+    };
+
+}
+
+function showCateringStats() {
+    showPopFoodByType();
+    showAvgPrice();
+    showPopFood();
+}
+
+function showAllRevenue() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:5000/viewRevenue/showAllRevenue", true);
+    xhttp.send();
+
+    xhttp.onload = function () {
+        let revenue = {};
+        revenue = this.responseText;
+        let revenueParsed = JSON.parse(revenue);
+
+
+        let t = '<tbody class="table">'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Revenue Date' + '</td>';
+        t += '<th>' + 'Revenue' + '</td>';
+        t += '<th>' + 'Guest Number' + '</td>';
+        t += '</tr>';
+        for (i in revenueParsed) {
+            t += '<tr>';
+            for (j in revenueParsed[i]) {
+                t += '<td>' + revenueParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('revenue-table').innerHTML = t;
+
+    };
+}
+
+function showRevenueByDate() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:5000/viewRevenue/showRevenueByDate", true);
+    xhttp.send();
+
+    xhttp.onload = function () {
+        let revenue = {};
+        revenue = this.responseText;
+        let revenueParsed = JSON.parse(revenue);
+
+
+        let t = '<tbody class="table">'
+        t += '<table class="table table-bordered table-striped">'
+        t += '<tr>';
+        t += '<th>' + 'Revenue Date' + '</td>';
+        t += '<th>' + 'Revenue' + '</td>';
+        t += '</tr>';
+        for (i in revenueParsed) {
+            t += '<tr>';
+            for (j in revenueParsed[i]) {
+                t += '<td>' + revenueParsed[i][j] + '</td>';
+            }
+            t += '</tr>';
+        }
+
+        t += '</table>'
+        t += '</tbody>';
+        document.getElementById('revenue-table').innerHTML = t;
+
+    };
+}
+
+function showTotalRevenue() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:5000/viewRevenue/showTotalRevenue", true);
+    xhttp.send();
+
+    xhttp.onload = function () {
+        let revenue = {};
+        revenue = this.responseText;
+        let revenueParsed = JSON.parse(revenue);
+        console.log(revenueParsed)
+        alert("Total Revenue: $" + revenueParsed);
     };
 }
