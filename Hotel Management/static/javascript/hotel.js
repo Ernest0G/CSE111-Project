@@ -690,4 +690,36 @@ function showTotalRevenue() {
         console.log(revenueParsed)
         alert("Total Revenue: $" + revenueParsed);
     };
+
+    function showAllRevenue() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "http://localhost:5000/viewRevenue", true);
+        xhttp.send();
+    
+        xhttp.onload = function () {
+            let revenue = {};
+            revenue  = this.responseText;
+            let revenueParsed = JSON.parse(revenue);
+    
+    
+            let t = '<tbody class="table">'
+            t += '<table class="table table-bordered table-striped">'
+            t += '<tr>';
+            t += '<th>' + 'Revenue Date' + '</td>';
+            t += '<th>' + 'Revenue' + '</td>';
+            t += '</tr>';
+            for (i in revenueParsed) {
+                t += '<tr>';
+                for (j in revenueParsed[i]) {
+                    t += '<td>' + revenueParsed[i][j] + '</td>';
+                }
+                t += '</tr>';
+            }
+    
+            t += '</table>'
+            t += '</tbody>';
+            document.getElementById('revenue-table').innerHTML = t;
+    
+        };
+    }
 }
