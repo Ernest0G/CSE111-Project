@@ -351,7 +351,9 @@ def showStaffFeedback():
     global conn
 
     cur = conn.cursor()
-    sql = """SELECT * From feedback"""
+    sql = """SELECT f_guestNumber,f_staffID,s_jobTitle,f_rating,f_comment
+             From feedback, staff
+             WHERE f_staffID = s_ID"""
     cur.execute(sql)
     rows = cur.fetchall()
 

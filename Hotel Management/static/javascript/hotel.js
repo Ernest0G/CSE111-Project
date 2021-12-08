@@ -469,6 +469,7 @@ function showStaffFeedback() {
         t += '<tr>';
         t += '<th>' + 'Guest Number' + '</td>';
         t += '<th>' + 'Staff Id' + '</td>';
+        t += '<th>' + 'Staff Job Title' + '</td>';
         t += '<th>' + 'Rating' + '</td>';
         t += '<th>' + 'Guest Comment' + '</td>';
         t += '</tr>';
