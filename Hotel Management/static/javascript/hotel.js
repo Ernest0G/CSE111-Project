@@ -193,7 +193,7 @@ function submitRoomFilters() {
 
 }
 
-function addBooking() {
+function createBooking() {
 
     var bookGuest = document.getElementById("book-guest-id").value;
     var bookRoom = document.getElementById("book-room-number").value;
@@ -201,11 +201,15 @@ function addBooking() {
     var bookDays = document.getElementById("book-days").value;
 
     var bookingInfo = { bookGuest, bookRoom, bookDate, bookDays };
-    console.log(bookingInfo);
+
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:5000/viewRooms/addBooking", true);
+    xhttp.open("POST", "http://localhost:5000/viewRooms/createBooking", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(bookingInfo));
+
+    xhttp.onload = function () {
+        alert("Booking Created");
+    }
 }
 
 function showCateringMenu() {
@@ -353,18 +357,22 @@ function showGuests() {
 }
 
 function addGuest() {
-    var staffName = document.getElementById("name-search").value;
-    var staffJob = document.getElementById("filter-staff-job").value;
+    var gNum = document.getElementById("guest-id").value;
+    var gName = document.getElementById("guest-name").value;
+    var gPhone = document.getElementById("guest-phone").value;
+    var gEmail = document.getElementById("guest-email").value;
+    var gCount = document.getElementById("guest-count").value;
+
 
     var guest = { gNum, gName, gPhone, gEmail, gCount };
-    console.log(staffFilters);
+    console.log(guest);
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "http://localhost:5000/viewGuests/addGuest", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(guest));
 
     xhttp.onload = function () {
-
+        alert("Guest Added");
     };
 }
 

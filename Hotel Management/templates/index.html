@@ -115,7 +115,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        onclick="addBooking()">Submit</button>
+                        onclick="createBooking()">Submit</button>
                 </div>
             </div>
         </div>
@@ -194,15 +194,49 @@
             <button type="button" class="button" onclick="showGuests()">
                 Show Guests
             </button>
-            <button type="button" class="button" onclick="showGuestEdit()">
-                Edit Guests
+            <button type="button" class="button" data-toggle="modal" data-target="#add-guest-modal">
+                Add Guest
             </button>
         </div>
         <div class="table container" id="guests-table">
             <!--Table Generated Here-->
         </div>
     </div>
-
+    <div class="modal fade" id="add-guest-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="add-guest-modal">Create Booking</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="book-guest-id">Enter Guest Number:
+                        <input type="text" class="form-control" id="guest-id" required>
+                    </label>
+                    <label for="book-room-number">Enter Guest Name:
+                        <input type="text" class="form-control" id="guest-name" required>
+                    </label>
+                    <label for="book-date">Enter Phone Number:
+                        <input type="tel" class="form-control" id="guest-phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            required>
+                    </label>
+                    <label for="book-days">Enter Email:
+                        <input type="email" class="form-control" id="guest-email" required>
+                    </label>
+                    <label for="book-days">Enter Party Count:
+                        <input type="email" class="form-control" id="guest-count" required>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="addGuest()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="content-container" id="view-staff">
         <div class="view-options">
             <button type="button" class="button" onclick="showAllStaff()">
@@ -270,7 +304,8 @@
         </div>
     </div>
     <div class="content-container" id="view-revenue">
-        <button type="button" class="button" onclick="showRevenue()"> <!-- This is the button that shows revenue-->
+        <button type="button" class="button" onclick="showRevenue()">
+            <!-- This is the button that shows revenue-->
             Show Revenue
         </button>
         <div class="table-container" id="revenue-table">

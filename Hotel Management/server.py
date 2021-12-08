@@ -82,7 +82,7 @@ def showBooking():
     global conn
     
     cur = conn.cursor()
-    sql = """SELECT * FROM booking GROUP BY b_guestNumber"""
+    sql = """SELECT * FROM booking """
     cur.execute(sql)
     rows = cur.fetchall()
 
@@ -122,23 +122,24 @@ def createBooking():
 
     roomFilters = {}
     roomFilters.update(request.get_json())
-    print(roomFilters)
+    
 
     cur = conn.cursor()
     sql = """
             INSERT INTO booking (b_guestNumber,b_roomNumber, b_dateBooked,b_daysBooked)
             VALUES (?,?,?,?)"""
-    args =(roomFilters['bedCount'],roomFilters['roomCap'],roomFilters['roomType'])
+    args =(roomFilters['bookGuest'],roomFilters['bookRoom'],roomFilters['bookDate'],roomFilters['bookDays'])
     cur.execute(sql,args)
-    rows = cur.fetchall()
     conn.commit()
+    rows = cur.fetchall()
+    
     data = []
     for row in rows:
         data.append(list(row))
     return jsonify(data)
 
 @app.route('/viewCatering/showCateringMenu', methods = ['GET'],endpoint = 'showCateringMenu')
-def showBooking():
+def showCatering():
     global conn
     
     cur = conn.cursor()
@@ -236,33 +237,20 @@ def showGuests():
 
     return jsonify(data)
 
-@app.route('/viewGuests/showFilteredGuests/<guestsFilters>', methods = ['GET'],endpoint = 'showFilteredGuests')
-def showFilteredGuests(guestsFilters):
+@app.route('/viewGuests/addGuest', methods = ['POST'],endpoint = 'addGuest')
+def addGuest():
     global conn
     
-    print(guestsFilters)
-
+    guest = {}
+    guest.update(request.get_json())
     cur = conn.cursor()
-    sql = """SELECT * 
-            FROM guest
-            WHERE g_guestNumber = ? AND g_name = ? AND g_guestCount = ?"""
-    args =([guestsFilters[0]],guestsFilters[1],guestsFilters[2])
+    sql = """
+            INSERT INTO guest
+            VALUES (?,?,?,?,?)
+    """
+    args = (guest['gNum'],guest['gName'],guest['gPhone'],guest['gEmail'],guest['gCount'])
     cur.execute(sql,args)
-    rows = cur.fetchall()
-
-    data = []
-    for row in rows:
-        data.append(list(row))
-
-    return jsonify(data)
-
-@app.route('/viewGuests/showGuests/<guestName>', methods = ['POST'],endpoint = 'editGuests')
-def editGuests():
-    global conn
-    
-    cur = conn.cursor()
-    sql = """SELECT * FROM guest GROUP BY g_guestNumber"""
-    cur.execute(sql)
+    conn.commit()
     rows = cur.fetchall()
 
 
