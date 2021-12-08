@@ -1,3 +1,4 @@
-Hotel Management System
+**Hotel Management System**
+By:
 Ernesto Gutierrez
 Huy Vu
