@@ -40,6 +40,9 @@
             <button type="button" class="button" data-toggle="modal" data-target="#booking-modal">
                 Create Booking
             </button>
+            <button type="button" class="button" data-toggle="modal" data-target="#booking-delete-modal">
+                Delete Booking
+            </button>
         </div>
         <div class="table-container" id="room-table">
             <!--Table Generated Here-->
@@ -120,6 +123,28 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="booking-delete-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="booking-delete-modal-label">Delete Booking</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="delete-booking-room">Enter Room Number:
+                        <input type="text" class="form-control" id="booking-delete-room" required>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="deleteBooking()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="content-container" id="view-catering">
         <div class="view-options">
@@ -135,6 +160,9 @@
             </button>
             <button type="button" class="button" data-toggle="modal" data-target="#catering-modal">
                 Create Catering Bill
+            </button>
+            <button type="button" class="button" data-toggle="modal" data-target="#delete-Bill-modal">
+                Delete Catering Bill
             </button>
         </div>
         <div class="table container" id="catering-table">
@@ -173,6 +201,28 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="delete-Bill-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete-Bill-modal">Delete Bill</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="bill-delete-id">Enter Bill Id:
+                        <input type="text" class="form-control" id="bill-delete-id" required>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="deleteBill()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="catering-stats-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -197,6 +247,9 @@
             <button type="button" class="button" data-toggle="modal" data-target="#add-guest-modal">
                 Add Guest
             </button>
+            <button type="button" class="button" data-toggle="modal" data-target="#delete-guest-modal">
+                Delete Guest
+            </button>
         </div>
         <div class="table container" id="guests-table">
             <!--Table Generated Here-->
@@ -206,7 +259,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="add-guest-modal">Create Booking</h5>
+                    <h5 class="modal-title" id="add-guest-modal">Add Guest</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -226,7 +279,7 @@
                         <input type="email" class="form-control" id="guest-email" required>
                     </label>
                     <label for="book-days">Enter Party Count:
-                        <input type="email" class="form-control" id="guest-count" required>
+                        <input type="text" class="form-control" id="guest-count" required>
                     </label>
                 </div>
                 <div class="modal-footer">
@@ -237,6 +290,29 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="delete-guest-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete-guest-modal">Delete Guest</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="guest-delete-id">Enter Guest Number:
+                        <input type="text" class="form-control" id="guest-delete-id" required>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="deleteGuest()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="content-container" id="view-staff">
         <div class="view-options">
             <button type="button" class="button" onclick="showAllStaff()">

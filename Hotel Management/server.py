@@ -138,6 +138,29 @@ def createBooking():
         data.append(list(row))
     return jsonify(data)
 
+@app.route('/viewGuests/deleteBooking', methods = ['POST'],endpoint = 'deleteBooking')
+def deleteBooking():
+    global conn
+    
+    booking = {}
+    booking.update(request.get_json())
+    bookingId = booking['rId']
+    cur = conn.cursor()
+    sql = """
+            DELETE FROM booking
+            WHERE b_roomNumber = ?
+    """
+    args = ([bookingId])
+    cur.execute(sql,args)
+    conn.commit()
+    rows = cur.fetchall()
+
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
 @app.route('/viewCatering/showCateringMenu', methods = ['GET'],endpoint = 'showCateringMenu')
 def showCatering():
     global conn
@@ -260,6 +283,53 @@ def addGuest():
         data.append(list(row))
 
     return jsonify(data)
+
+@app.route('/viewGuests/deleteGuest', methods = ['POST'],endpoint = 'deleteGuest')
+def deleteGuest():
+    global conn
+    
+    guest = {}
+    guest.update(request.get_json())
+    gNum = guest['gNum']
+    cur = conn.cursor()
+    sql = """
+            DELETE FROM guest
+            WHERE g_guestNumber = ?
+    """
+    args = ([gNum])
+    cur.execute(sql,args)
+    conn.commit()
+    rows = cur.fetchall()
+
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
+@app.route('/viewGuests/deleteBill', methods = ['POST'],endpoint = 'deleteBill')
+def deleteBill():
+    global conn
+    
+    bill = {}
+    bill.update(request.get_json())
+    billId = bill['bId']
+    cur = conn.cursor()
+    sql = """
+            DELETE FROM cateringBill
+            WHERE cb_id = ?
+    """
+    args = ([billId])
+    cur.execute(sql,args)
+    conn.commit()
+    rows = cur.fetchall()
+
+    data = []
+    for row in rows:
+        data.append(list(row))
+
+    return jsonify(data)
+
 
 @app.route('/viewStaff/showAllStaff', methods = ['GET'],endpoint = 'showAllStaff')
 def showAllStaff():

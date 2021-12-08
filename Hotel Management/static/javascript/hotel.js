@@ -212,6 +212,20 @@ function createBooking() {
     }
 }
 
+function deleteBooking() {
+    var rId = document.getElementById("booking-delete-room").value;
+
+    var booking = { rId };
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:5000/viewGuests/deleteBooking", true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(JSON.stringify(booking));
+
+    xhttp.onload = function () {
+        alert("Booking Deleted");
+    };
+}
+
 function showCateringMenu() {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "http://localhost:5000/viewCatering/showCateringMenu", true);
@@ -321,6 +335,21 @@ function createCateringBill() {
     };
 }
 
+function deleteBill() {
+    var bId = document.getElementById("bill-delete-id").value;
+
+    var guest = { bId };
+    console.log(guest);
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:5000/viewGuests/deleteBill", true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(JSON.stringify(guest));
+
+    xhttp.onload = function () {
+        alert("Bill Deleted");
+    };
+}
+
 function showGuests() {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "http://localhost:5000/viewGuests/showGuests", true);
@@ -373,6 +402,21 @@ function addGuest() {
 
     xhttp.onload = function () {
         alert("Guest Added");
+    };
+}
+
+function deleteGuest() {
+    var gNum = document.getElementById("guest-delete-id").value;
+
+    var guest = { gNum };
+    console.log(guest);
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:5000/viewGuests/deleteGuest", true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(JSON.stringify(guest));
+
+    xhttp.onload = function () {
+        alert("Guest Deleted");
     };
 }
 
