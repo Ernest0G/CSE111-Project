@@ -432,8 +432,8 @@ def showPopFoodByType():
 def showAvgPrice():
     cur = conn.cursor()
     sql = """
-            SELECT AVG(c_price)
-            FROM catering;
+            SELECT AVG(cb_price)
+            FROM cateringBill;
         
             """
     cur.execute(sql)
